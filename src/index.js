@@ -1,12 +1,10 @@
-import _ from 'lodash';
-import print from './print';
-const initMsg = () => {
-    const msg = _.join(["hello", "world"], " ");
-    const element = document.createElement('div');
-    element.innerText = msg;
-    element.addEventListener("click", print)
+import * as React from 'react';
+import App from './App';
+import * as ReactDom from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-    return element;
-}
-
-document.body.appendChild(initMsg())
+ReactDom.render(
+    <Router>
+        <App />
+    </Router>
+, document.getElementById('root'))

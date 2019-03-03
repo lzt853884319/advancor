@@ -1,0 +1,16 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {
+        "no-debugger": true,
+        "quotemark": [true, "single", "jsx-double"]
+    },
+    "rules": {
+        "no-debugger": true,
+        "quotemark": [true, "single", "jsx-double"],
+        "ordered-imports": false
+    },
+    "rulesDirectory": []
+}
