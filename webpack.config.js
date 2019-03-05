@@ -1,16 +1,19 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWwebpackPlugin = require('html-webpack-plugin');
-// const webpack = require('webpack');
+const webpack = require('webpack');
+
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-    mode: 'development',
+    mode: isDev?'development':'production',
     entry: {
         app: './src/index.js'
     },
     devServer: {
         contentBase: './dist',
-        port: 8888
+        port: 8888,
+        hot: isDev
     },
     output: {
         filename: '[name].bundle.js',
@@ -26,6 +29,16 @@ module.exports = {
         {
             test: /\.(js|jsx)$/,
             use: 'babel-loader',
+            exclude: /node_modules/
+        },
+        {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
+            exclude: /node_modules/
+        },
+        {
+            test: /\.scss$/,
+            use: ['style-loader', 'css-loader', 'sass-loader'],
             exclude: /node_modules/
         },
       ]
@@ -44,6 +57,6 @@ module.exports = {
             filename: 'index.html',
             template: path.resolve(__dirname, './src/index.html')
         }),
-        // new webpack.HotModuleReplacementPlugin()
+        isDev?new webpack.HotModuleReplacementPlugin():null
     ]
 }
