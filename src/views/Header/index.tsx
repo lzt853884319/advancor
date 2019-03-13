@@ -8,8 +8,8 @@ export default class extends React.Component {
             <div className="header">
                 <ul className="nav">
                     {
-                        navList.map(item => {
-                            return <li>{item}</li>
+                        navList.map((item, index) => {
+                            return <li key={index}>{item}</li>
                         })
                     }
                 </ul>
