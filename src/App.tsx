@@ -5,40 +5,55 @@ import { hot } from 'react-hot-loader/root';
 // import {dispatch} from 'redux';
 // import _ from 'lodash';
 import Header from './views/Header';
-import store from './store';
-import {addCouter} from './store/ActionCreate'
+import {connect} from 'react-redux';
+import {addCouter, minusCouter} from './store/ActionCreate'
 
 const isDev = process.env.NODE_ENV === 'development';
 
-class App extends React.Component<{}, {couter: number}> {
+interface IProps {
+    couter: {num: number};
+    addCouterClick: () => {};
+    minusCouterClick: () => {};
+}
+
+class App extends React.Component<IProps, {}> {
     constructor(props) {
         super(props);
-        this.state=store.getState()
-        store.subscribe(this.reloadData)
     }
     public render(){
         return (
             <div>
                 <Header />
                 <div>
-                    <Link to="/home">首页{this.state.couter}</Link>
+                    <Link to="/home">首页{this.props.couter.num}</Link>
                     &nbsp;&nbsp;
                     <Link to="/about">详情页</Link>
                     &nbsp;&nbsp;
                     <Link to="/user">用户</Link>
                 </div>
-                <div onClick={this.addCouterClick}>++`1</div>
+                <div onClick={this.props.addCouterClick}>点击后+1</div>
+                <div onClick={this.props.minusCouterClick}>点击后-1</div>
                 <Routes />
             </div>
         );
     }
-    public addCouterClick =() => {
-        const action = addCouter()
-        store.dispatch(action)
-    }
-    public reloadData = () => {
-        this.setState(store.getState())
+}
+const mapStateToProps = state => state;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addCouterClick: () => {
+            const action = addCouter()
+            dispatch(action)
+        },
+        minusCouterClick: () => {
+            const action = minusCouter()
+            dispatch(action)
+        }
     }
 }
 
-export default isDev? hot(App): App;
+const ReduxApp = connect(mapStateToProps, mapDispatchToProps)(App)
+
+
+// export default ReduxApp;
+export default isDev? hot(ReduxApp): ReduxApp;

@@ -47,7 +47,8 @@ module.exports = {
     resolve: {
         alias: {
             config: path.resolve(__dirname, './src/config/'),
-            views: path.resolve(__dirname, './src/views/')
+            views: path.resolve(__dirname, './src/views/'),
+            store: path.resolve(__dirname, './src/store/')
         },
         extensions: [ '.tsx', '.ts', '.js', '.jsx' ]
     },

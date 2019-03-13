@@ -9,11 +9,16 @@ export const addListItem = () => ({
     type: actionTypes.ADD_LIST_ITEM
 })
 
+export const deleteItem = (index) => ({
+    type: actionTypes.DELET_ITEM,
+    index
+})
+
 export const addCouter= () => ({
     type: actionTypes.ADD_COUTER
 })
 
-export const deleteItem = (index) => ({
-    type: actionTypes.DELET_ITEM,
-    index
+
+export const minusCouter= () => ({
+    type: actionTypes.MINUS_COUTER
 })
